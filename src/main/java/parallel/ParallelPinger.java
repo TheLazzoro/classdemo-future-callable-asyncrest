@@ -37,10 +37,19 @@ public class ParallelPinger {
         List<String> results = new ArrayList<>();
         ExecutorService es = Executors.newCachedThreadPool();
 
+        // We make a list of futures, since they fetch on their own thread.
+        List<Future<String>> futures = new ArrayList<>();
         for (int i = 0; i < urls.length; i++) {
             Future<String> fut = es.submit(new PingURL(urls[i]));
-            String result = fut.get();
-            results.add(result);
+            futures.add(fut);
+        }
+
+        // Loops through all fetched futures.
+        // Each are blocking the loop until they finish fecthing,
+        // so some futures later down the loop CAN finish before the others
+        for(Future<String> future : futures) {
+            String response = future.get();
+            results.add(response);
         }
 
         return results;
