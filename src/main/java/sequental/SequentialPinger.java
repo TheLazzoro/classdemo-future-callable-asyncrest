@@ -74,6 +74,4 @@ public class SequentialPinger {
     System.out.println("Time to check URLS: " + total + "ms.");
 
   }
-
-  
 }

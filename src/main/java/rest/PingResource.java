@@ -45,6 +45,7 @@ public class PingResource {
   @Produces(MediaType.APPLICATION_JSON)
   @Path("solution")
   public void getServerStatus2(@Suspended final AsyncResponse ar) throws Exception {
+      /*
     System.out.println("---- A -------");
         new Thread(() -> {
             List<String> res = null;
@@ -57,6 +58,8 @@ public class PingResource {
             ar.resume("{\"status\":\"" + GSON.toJson(res) + "\"}");
         }).start();
         System.out.println("---- C -------");
+
+       */
   }
     
 }
